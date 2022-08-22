@@ -1,0 +1,17 @@
+{
+    "client": {
+        "authToken": "TOKEN HERE",
+        "clientID": "CLIENT ID HERE"
+    },
+    "handler": {
+        "guildID": "GUILD ID HERE [IF YOU WANT SLASH COMMAND IN ONE GUILD] (optional)"
+    },
+    "global": {
+        "prefix": "PREFIX HERE"
+    },
+    "developers": {
+        "owner": [
+            "OWNER ID HERE"
+        ]
+    }
+}
