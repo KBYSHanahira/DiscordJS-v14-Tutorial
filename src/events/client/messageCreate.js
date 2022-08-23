@@ -21,11 +21,7 @@ client.on('messageCreate', async (message) => {
 
     let command = client.commands.get(cmd);
 
-    if (!command) {
-        command = client.commands.get(client.aliases.get(cmd))
-    } else {
-        return;
-    }
+    if (!command) command = client.commands.get(client.aliases.get(cmd))
 
     if (command) {
         if (command.userPermissions) {
