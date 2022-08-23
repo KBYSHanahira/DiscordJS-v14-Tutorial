@@ -6,9 +6,9 @@ module.exports = (client) => {
 
     fs.readdirSync('./src/commands/').forEach(dir => {
         const commands = fs.readdirSync(`./src/commands/${dir}`).filter(file => file.endsWith('.js'));
-        for(let file of commands) {
+        for (let file of commands) {
             let pull = require(`../commands/${dir}/${file}`);
-            if(pull.config.name) {
+            if (pull.config.name) {
                 client.commands.set(pull.config.name, pull);
                 console.log(`[HANDLER - COMMAND] Loaded a file : ${pull.config.name}`.green)
             } else {
@@ -16,6 +16,10 @@ module.exports = (client) => {
                 console.log(`[HANDLER - COMMAND] Couldn't load the file ${file}, missing module name value.`.red.bold)
                 console.log("----------------------------------------".red)
                 continue;
+            };
+            
+            if (pull.config.aliases && Array.isArray(pull.config.aliases)) {
+                pull.config.aliases.forEach(alias => client.aliases.set(alias, pull.config.name))
             }
         }
     })

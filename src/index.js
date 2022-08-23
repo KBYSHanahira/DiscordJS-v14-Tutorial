@@ -30,6 +30,7 @@ if (!config.client.authToken) {
 client.commands = new Collection()
 client.events = new Collection()
 client.slash = new Collection()
+client.aliases = new Collection()
 
 module.exports = client;
 

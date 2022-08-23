@@ -21,7 +21,11 @@ client.on('messageCreate', async (message) => {
 
     let command = client.commands.get(cmd);
 
-    if (!command) return message.reply(`💢 **[${message.member.displayName}]** its an invalid command`);
+    if (!command) {
+        command = client.commands.get(client.aliases.get(cmd))
+    } else {
+        return;
+    }
 
     if (command) {
         if (command.userPermissions) {
@@ -51,15 +55,15 @@ client.on('messageCreate', async (message) => {
 
             config.developers.owner.forEach(user => {
                 const fetchOwner = message.guild.members.cache.get(user);
-                if(!fetchOwner) return allowedUsers.push(`**[Unknown#0000]**`)
+                if (!fetchOwner) return allowedUsers.push(`**[Unknown#0000]**`)
                 allowedUsers.push(`${fetchOwner.user.tag}`);
             });
 
-            if(!config.developers.owner.some(ID => message.member.id.includes(ID))) return message.reply({
-                embeds : [
+            if (!config.developers.owner.some(ID => message.member.id.includes(ID))) return message.reply({
+                embeds: [
                     new EmbedBuilder()
-                    .setDescription(`💢 **[${message.member.displayName}]** only owners can use this command!\n\`\`\`\n${allowedUsers.join(", ")}\n\`\`\``)
-                    .setColor('Red')
+                        .setDescription(`💢 **[${message.member.displayName}]** only owners can use this command!\n\`\`\`\n${allowedUsers.join(", ")}\n\`\`\``)
+                        .setColor('Red')
                 ]
             })
         }
