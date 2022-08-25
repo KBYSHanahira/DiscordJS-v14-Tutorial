@@ -25,7 +25,7 @@ client.on("interactionCreate", async interaction => {
                 ephemeral: true
             })
         } else if (command.botPermissions) {
-            if (!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.resolve(command.botPermissions || []))) return interaction.reply({
+            if (!interaction.guild.members.me.permissionsIn(interaction.channelId).has(PermissionsBitField.resolve(command.botPermissions || []))) return interaction.reply({
                 embeds: [
                     new EmbedBuilder()
                         .setDescription(`💢 **[${interaction.member.displayName}]** i don't have permissions to use this command\n\`\`\`\n${command.botPermissions || []}\n\`\`\``)
